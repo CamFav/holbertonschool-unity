@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
 
+    public Transform startTransform; // Reference to the start position
+    public float fallThreshold = -10.0f; // Threshold for detecting falling off the platform
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -40,5 +43,12 @@ public class PlayerController : MonoBehaviour
 
         // Move the player
         controller.Move(moveDirection * Time.deltaTime);
+
+        // Check if the player falls below the fall threshold
+        if (transform.position.y < fallThreshold)
+        {
+            // Reset the player position to the start position
+            transform.position = startTransform.position;
+        }
     }
 }
