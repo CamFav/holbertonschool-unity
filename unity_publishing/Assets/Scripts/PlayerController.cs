@@ -7,13 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10f; // Controls velocity multiplier
     private Rigidbody rb;
-    private int score =  0;   // Set the initial value of score to 0.
+    private int score = 0;   // Set the initial value of score to 0.
     public int health = 5;
     public Text scoreText;
     public Text healthText;
     public Text winLoseText; // Reference to the WinLoseText UI element
     public Image winLoseBG; // Reference to the WinLoseBG UI element
-
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +35,11 @@ public class PlayerController : MonoBehaviour
             score = 0;
             health = 5;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
+        }
     }
 
     // FixedUpdate is called at a fixed interval and is independent of frame rate
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour
     // Increment the value of score when the Player touches an object tagged Pickup
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pickup")) // Check if player collides with a object tagged Pickup (coin)
+        if (other.CompareTag("Pickup")) // Check if player collides with an object tagged Pickup (coin)
         {
             score++;
             SetScoreText();
@@ -67,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             SetHealthText();
-            Debug.Log("Health: "  + health);
+            Debug.Log("Health: " + health);
         }
 
         if (other.CompareTag("Goal"))
