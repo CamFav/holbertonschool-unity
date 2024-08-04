@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
     // Determines if the game is paused or not.
+
+    public AudioMixer audioMixer; // Reference to your AudioMixer
+    private AudioMixerSnapshot normalSnapshot;
+    private AudioMixerSnapshot muffledSnapshot;
+    private bool isPaused = false;
     private bool gamePaused;
     private void Start() {
         gamePaused = false;
     }
+
+
     private void Update() {
         // Pause the game when the user press the Cancel button.
         if (Input.GetButtonDown("Cancel")){
@@ -71,3 +79,4 @@ public class PauseMenu : MonoBehaviour
     }
     
 }
+
