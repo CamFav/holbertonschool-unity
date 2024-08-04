@@ -1,16 +1,14 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TimerTrigger : MonoBehaviour
 {
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Timer playerTimer = other.GetComponent<Timer>();
-            if (playerTimer != null)
-            {
-                playerTimer.StartTimer();
-            }
+    void OnTriggerExit(Collider other) {
+        // Detects when the player exit the TimeTrigger object
+        if (other.name == "Player"){
+            if (other.GetComponent<Timer>().enabled == false)
+                other.GetComponent<Timer>().enabled = true;
         }
     }
 }

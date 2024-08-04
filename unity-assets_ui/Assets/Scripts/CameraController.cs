@@ -1,37 +1,60 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform player;
-    public float rotationSpeed = 5.0f; // Rotation speed of the camera
-
-    private Vector3 offset; // Offset initial between camera and player
-    private float currentX = 0.0f;
-
+    private Vector2 mouseInput;
+    private Vector3 angles;
+    private Vector3 cameraPos;
+    /// <summary>
+    /// Inverts mouse direction on the y.
+    /// </summary>
+    public bool isInverted;
+    private float rotationY;
+    private float newPosY;
+    private float newPosZ;
+    // Start is called before the first frame update
     void Start()
     {
-        offset = transform.position - player.position;
+        cameraPos = transform.localPosition;
+        if (PlayerPrefs.GetString("__isInverted__") == "true"){
+          isInverted = true;
+        }
     }
 
-    void LateUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        // Rotation based on mouse movements
-        currentX += Input.GetAxis("Mouse X") * rotationSpeed;
+    
+      if (Input.GetMouseButton(1)){
+         
+            mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+          
+            angles = transform.localRotation.eulerAngles;
+            // Rotation on the Y
+            if (isInverted){
+              mouseInput.y = -mouseInput.y;
+            }
+            rotationY = (angles.x + 180f) % 360f - 180f;
+            rotationY = rotationY - mouseInput.y * 1;
+            rotationY = Mathf.Clamp (rotationY, 3, 24f);
+            transform.localRotation = Quaternion.Euler(new Vector3 (rotationY, angles.y, angles.z));
 
-        // Calcul of the camera rotation
-        Quaternion rotation = Quaternion.Euler(0, currentX, 0);
+            // Limitation on the Y pos of the camera
+            newPosY = Mathf.Clamp(cameraPos.y * (rotationY / 12), 0, 6f);
+          
+            // Limitation on the Z pos of the camera (zoom effect)
+            newPosZ = Mathf.Clamp(newPosY - cameraPos.z, -4, -6);
+            transform.localPosition = new Vector3(cameraPos.x, newPosY, newPosZ);
 
-        // Calcul of the new position of the camera after rotation
-        Vector3 newPosition = player.position + rotation * offset;
+          
 
-        // Apply new camera position
-        transform.position = newPosition;
+                          // Rotation on the X
+            transform.parent.Rotate(Vector3.up, mouseInput.x * 1);
+      }
 
-        // Camera look at player
-        transform.LookAt(player.position);
-
-        // Updates the direction of the player following the camera position
-        Vector3 direction = Quaternion.Euler(0, currentX, 0) * Vector3.forward;
-        player.forward = direction.normalized;
     }
+
+    
 }

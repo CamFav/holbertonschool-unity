@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5335e0fad804f6c49b649795e0172589
+guid: c1ef8852b4de4a7418b4445478160864
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -54,11 +54,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 592, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -103,7 +103,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -128,19 +128,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -150,7 +137,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 592
+        width: 600
         height: 650
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -169,10 +156,10 @@ TextureImporter:
       name: button-level02_1
       rect:
         serializedVersion: 2
-        x: 598
+        x: 600
         y: 0
-        width: 610
-        height: 642
+        width: 600
+        height: 650
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,12 +177,12 @@ TextureImporter:
       name: button-level02_2
       rect:
         serializedVersion: 2
-        x: 1202
+        x: 1220
         y: 0
-        width: 598
-        height: 648
+        width: 580
+        height: 650
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

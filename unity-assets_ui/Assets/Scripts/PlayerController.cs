@@ -1,55 +1,89 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    /// <summary>
+    /// Controls player speed
+    /// </summary>
     public float speed = 10.0f;
-    public float jumpForce = 8.0f;
+    // Rigidbody of the player
+    private Rigidbody rb;
+    /// <summary>
+    /// Force of player jump
+    /// </summary>
+    public float jumpForce = 16.0f;
+    // Checks if the player is grounded or not (used for jump)
+    private bool isGrounded;
+    Vector3 direction;
 
-    public float gravity = 20.0f;
+   
 
-    private Vector3 moveDirection = Vector3.zero;
-    private CharacterController controller;
-
-    public Transform startTransform; // Reference to the start position
-    public float fallThreshold = -10.0f; // Threshold for detecting falling off the platform
-
+    // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+        isGrounded = true;
     }
 
-    void Update()
-    {
-        // Check if the player is on the ground
-        if (controller.isGrounded)
-        {
-            // Get input from WASD keys
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
 
-            // Create a vector based on the input
-            moveDirection = new Vector3(moveHorizontal, 0.0f, moveVertical);
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
+    // Update is called each frame
+    void Update(){
+        direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-            // Check for jump input
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = jumpForce;
+        if (transform.position.y < -20f){
+            transform.position = (new Vector3(0,20f,0));
+            transform.rotation = Quaternion.identity;
+            isGrounded = false;
+        }
+      
+        if (isGrounded == true && Input.GetKeyDown(KeyCode.Space)){
+            //Debug.Log("Space used");
+            if (isGrounded){
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
         }
+         
+ 
+           
+    }
 
-        // Apply gravity
-        moveDirection.y -= gravity * Time.deltaTime;
 
-        // Move the player
-        controller.Move(moveDirection * Time.deltaTime);
+    // FixedUpdate is called according to framerate
+    void FixedUpdate(){
+        MoveCharacter(direction);
+      
+        if (!isGrounded){
+            Vector3 newVel = rb.velocity;
+            newVel.y -= (jumpForce * 2) * Time.deltaTime;
+            rb.velocity = newVel;
+        }
+            
+    }
 
-        // Check if the player falls below the fall threshold
-        if (transform.position.y < fallThreshold)
-        {
-            // Reset the player position to the start position
-            transform.position = startTransform.position;
+    void MoveCharacter(Vector3 movement){
+        //rb.rotation = CameraController.GameObject.GetComponent<CameraController>().transform.localRotation;
+        movement = transform.TransformDirection(movement);
+        rb.MovePosition(transform.position + (movement * speed * Time.deltaTime));
+    }
+    // Fired when the player collide with another object
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (isGrounded == false){
+            isGrounded = true;
         }
     }
+    
+
+    // Fired when the player gets out of a collission
+    void OnCollisionExit(Collision collision) {
+   
+            isGrounded = false;
+    }
+
+
+
+  
 }
