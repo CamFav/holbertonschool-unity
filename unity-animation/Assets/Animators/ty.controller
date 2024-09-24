@@ -6,7 +6,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: IdleToJump
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: isJumping
@@ -194,7 +194,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: JumpToIdle
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: isJumping
@@ -508,7 +508,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: JumpToRunning
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: isRunning
