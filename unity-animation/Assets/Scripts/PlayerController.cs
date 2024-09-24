@@ -28,14 +28,34 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
 
     /// <summary>
+    /// Reference to the Animator component to control animations on Ty.
+    /// </summary>
+    private Animator animator;
+
+    /// <summary>
+    /// Reference to the Ty GameObject where the Animator is located.
+    /// </summary>
+    public GameObject tyObject;
+
+    /// <summary>
     /// Transform of the player's starting position (spawn point).
     /// </summary>
-    public Transform startTransform; 
+    public Transform startTransform;
 
     /// <summary>
     /// The Y-axis threshold below which the player is considered to have fallen off the platform.
     /// </summary>
-    public float fallThreshold = -10.0f; 
+    public float fallThreshold = -10.0f;
+
+    /// <summary>
+    /// Minimum fall speed to trigger the falling animation.
+    /// </summary>
+    public float fallSpeedThreshold = -3.0f;
+
+    /// <summary>
+    /// Variable to track whether the player is currently falling.
+    /// </summary>
+    private bool isFalling = false;
 
     /// <summary>
     /// Height above the starting position where the player will respawn if they fall.
@@ -48,11 +68,24 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform;
 
     /// <summary>
-    /// Called when the script instance is being loaded. Initializes the CharacterController component.
+    /// Variables to track the jumping state.
+    /// </summary>
+    private bool isJumping = false;
+
+    /// <summary>
+    /// Called when the script instance is being loaded. Initializes the CharacterController and Animator components.
     /// </summary>
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        // Find the Animator component on the Ty GameObject
+        animator = tyObject.GetComponent<Animator>();
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator not found on Ty object.");
+        }
     }
 
     /// <summary>
@@ -60,26 +93,37 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Get input from horizontal and vertical axis (WASD keys)
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
         // Check if the player is grounded
         if (controller.isGrounded)
         {
-            // Get input from horizontal and vertical axis (WASD keys)
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
+            // If the player was falling and just landed, trigger Falling Flat Impact
+            if (isFalling)
+            {
+                isFalling = false;
+                animator.SetBool("isFalling", false); // Stop falling animation
+                animator.SetTrigger("Impact"); // Trigger Falling Flat Impact animation
+            }
 
-            // Get the forward and right vectors relative to the camera's orientation
+            // Reset the jump animation if the player has landed after a jump
+            if (isJumping)
+            {
+                isJumping = false;
+                animator.SetBool("isJumping", false); // Stop jump animation
+            }
+
+            // Calculate the movement direction based on camera orientation and user input
             Vector3 cameraForward = cameraTransform.forward;
             Vector3 cameraRight = cameraTransform.right;
 
-            // Flatten the vectors to remove vertical component and normalize them
             cameraForward.y = 0f;
             cameraRight.y = 0f;
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-            /// <summary>
-            /// Calculate the movement direction based on camera orientation and user input.
-            /// </summary>
             moveDirection = (cameraForward * moveVertical + cameraRight * moveHorizontal);
             moveDirection *= speed;
 
@@ -90,10 +134,31 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), 0.15f);
             }
 
+            // Set animator parameter to transition between Idle and Running
+            if (moveHorizontal != 0 || moveVertical != 0)
+            {
+                animator.SetBool("isRunning", true); // Player is moving, set isRunning to true
+            }
+            else
+            {
+                animator.SetBool("isRunning", false); // Player stopped, set isRunning to false
+            }
+
             // Check if the player pressed the Jump button
             if (Input.GetButton("Jump"))
             {
                 moveDirection.y = jumpForce;
+                isJumping = true;
+                animator.SetBool("isJumping", true); // Trigger jump animation
+            }
+        }
+        else
+        {
+            // If the player is falling and the fall speed is below the threshold, trigger the Falling animation
+            if (!isJumping && moveDirection.y < fallSpeedThreshold && !isFalling)
+            {
+                isFalling = true; // Player is falling
+                animator.SetBool("isFalling", true); // Trigger the fall animation
             }
         }
 
@@ -106,16 +171,22 @@ public class PlayerController : MonoBehaviour
         // Check if the player has fallen below the fall threshold
         if (transform.position.y < fallThreshold)
         {
-            /// <summary>
-            /// Respawn the player above the starting position to simulate falling from the air.
-            /// Reset horizontal movement to ensure the player falls straight down.
-            /// </summary>
+            // Respawn the player above the starting position
             Vector3 respawnPosition = new Vector3(startTransform.position.x, startTransform.position.y + respawnHeight, startTransform.position.z);
             transform.position = respawnPosition;
 
-            // Reset the horizontal movement direction to zero (no movement in x or z)
+            // Reset movement direction
             moveDirection.x = 0;
             moveDirection.z = 0;
         }
+        
     }
+
+
+    public void OnGettingUpEnd()
+    {
+    Vector3 correctedPosition = new Vector3(transform.position.x, startTransform.position.y, transform.position.z);
+    transform.position = correctedPosition;
+    }
+
 }

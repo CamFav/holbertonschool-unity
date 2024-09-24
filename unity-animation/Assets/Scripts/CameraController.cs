@@ -1,22 +1,19 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class MouseCameraController : MonoBehaviour
 {
-    public Transform player;
-    public float rotationSpeed = 5.0f; // Speed of the camera rotation
-    public bool isInverted = false; // Invert the Y-axis
+    public Transform player; // Player reference
+    public float rotationSpeed = 5.0f; // Rotation speed of main camera
+    public bool isInverted = false;
 
-    private Vector3 offset;
-    private float currentX = 0.0f; // Rotation around the Y-axis
-    private float currentY = 0.0f; // Rotation around the X-axis
-    public float verticalLimit = 80f; // Limit for vertical rotation
+    private float currentX = 0.0f; 
+    private float currentY = 0.0f;
+    public float verticalLimit = 80f; // Vertical rotation limit
 
     void Start()
     {
-        // Charger l'état d'inversion depuis PlayerPrefs
         isInverted = PlayerPrefs.GetInt("InvertY", 0) == 1;
         Debug.Log("InvertY loaded: " + isInverted);
-        offset = transform.position - player.position;
     }
 
     void LateUpdate()
@@ -33,12 +30,13 @@ public class CameraController : MonoBehaviour
         currentY -= mouseY;
         currentY = Mathf.Clamp(currentY, -verticalLimit, verticalLimit);
 
+        // Apply rotation to camera
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        Vector3 newPosition = player.position + rotation * offset;
-        transform.position = newPosition;
-        transform.LookAt(player.position);
+        transform.rotation = rotation;
 
-        Vector3 direction = Quaternion.Euler(0, currentX, 0) * Vector3.forward;
-        player.forward = direction.normalized;
+        Vector3 offset = new Vector3(0, 2.5f, -6.25f);
+        transform.position = player.position + rotation * offset;
+
+        transform.LookAt(player.position);
     }
 }
