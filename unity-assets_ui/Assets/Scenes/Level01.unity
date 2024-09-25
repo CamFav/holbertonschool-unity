@@ -3809,6 +3809,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6809829068606448028, guid: fb11600d2595a0c4ba8a83c39da6f235, type: 3}
+--- !u!1 &816222614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2328610001522578657, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+  m_PrefabInstance: {fileID: 3010623173843071975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &817973292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4253,7 +4258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1979984181d6fad49bde31836db76df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 816222614}
 --- !u!4 &875920589
 Transform:
   m_ObjectHideFlags: 0
@@ -11304,7 +11309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2328610001522578657, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2776365313118029963, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
       propertyPath: m_fontAsset
