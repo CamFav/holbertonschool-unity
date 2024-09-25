@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
     public Text TimerText;  // TimerText Component
     private float elapsedTime;
     private bool isRunning = false;
-    public Text FinalTimeText;
+    public TextMeshProUGUI FinalTimeText;
 
     void Update()
     {

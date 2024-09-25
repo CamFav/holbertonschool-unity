@@ -11302,6 +11302,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2328610001522578657, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776365313118029963, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2776365313118029963, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+      propertyPath: m_isOrthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776365313118029963, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2776365313118029963, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4761468210762670363, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8030880682853342188, guid: a1751ce9f9c418246a76dae2ee32c106, type: 3}
       propertyPath: m_Pivot.x
       value: 0
