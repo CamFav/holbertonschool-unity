@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-7659611586785715778
+--- !u!21 &-3248227444415672254
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Changa-Light Atlas Material
+  m_Name: Changa-Regular Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -3804298442077758371}
+        m_Texture: {fileID: -2292363569770786642}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -108,13 +108,13 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
---- !u!28 &-3804298442077758371
+--- !u!28 &-2292363569770786642
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Changa-Light Atlas
+  m_Name: Changa-Regular Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -166,20 +166,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Changa-Light SDF
+  m_Name: Changa-Regular
   m_EditorClassIdentifier: 
   hashCode: 0
-  material: {fileID: -7659611586785715778}
+  material: {fileID: -3248227444415672254}
   materialHashCode: 0
   m_Version: 1.1.0
-  m_SourceFontFileGUID: eb1171e0b0a36d44eb2967c27bec42e3
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: eb1171e0b0a36d44eb2967c27bec42e3, type: 3}
-  m_SourceFontFile: {fileID: 12800000, guid: eb1171e0b0a36d44eb2967c27bec42e3, type: 3}
+  m_SourceFontFileGUID: 5a34c62dc9e1bd64e8cedbc8ecd14ae1
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 5a34c62dc9e1bd64e8cedbc8ecd14ae1, type: 3}
+  m_SourceFontFile: {fileID: 12800000, guid: 5a34c62dc9e1bd64e8cedbc8ecd14ae1, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
     m_FaceIndex: 0
     m_FamilyName: Changa
-    m_StyleName: Light
+    m_StyleName: Regular
     m_PointSize: 90
     m_Scale: 1
     m_UnitsPerEM: 1000
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
-  - {fileID: -3804298442077758371}
+  - {fileID: -2292363569770786642}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
   m_ClearDynamicDataOnBuild: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
-    sourceFontFileGUID: eb1171e0b0a36d44eb2967c27bec42e3
+    sourceFontFileGUID: 5a34c62dc9e1bd64e8cedbc8ecd14ae1
     pointSizeSamplingMode: 0
     pointSize: 90
     padding: 9
